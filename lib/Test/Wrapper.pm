@@ -2,9 +2,17 @@ package Test::Wrapper;
 
 use Moose;
 
-no warnings qw/ uninitialized /;  # I know, I'm a bad boy
 
 use Test::Builder;
+
+use Moose::Exporter;
+
+no warnings qw/ uninitialized /;    # I know, I'm a bad boy
+
+Moose::Exporter->setup_import_methods(
+as_is => [ 'test_wrap' ] );
+    
+
 
 has [qw/ diag output todo /] => ( is => 'ro', );
 
@@ -19,37 +27,83 @@ sub is_success {
     return $_[0]->output =~ /^ok/;
 }
 
-sub import {
-    my ( $class, @subs ) = @_;
+#sub import {
+#   my ( $class, @subs ) = @_;
 
+#   my ($package) = caller;
+
+#   @_ = ( \@subs );
+
+#   goto &test_wrap;
+#}
+
+=head2 test_wrap( $test | \@tests, %params )
+
+Wraps the given test or tests such that, when invoked, they will
+not emit TAP output but return a C<Test::Wrapper> object.
+
+The parameters the function accept are:
+
+=over
+
+=item prefix 
+
+If defined, a wrapped function named '$prefix_<original_name>' will
+be created, and the original test function will be left alone.
+
+    use Test::More;
+    use Test::Wrapper;
+
+    test_wrap( 'like', prefix => 'wrapped_' );
+
+    like "foo" => qr/bar/;   # will emit TAP
+
+                             # will not emit TAP
+    my $test = wrapped_like( "yadah" => qw/ya/ );
+
+=back
+
+
+=cut
+
+sub test_wrap {
+    my ( $test, %args ) = @_;
+
+    my @tests = ref $test ? @$test : ($test);
+
+    $DB::single = 1;
     my ($package) = caller;
 
-    for (@subs) {
+    for ( @tests ) {
 
-        my $to_wrap = join '::', $package, $_;
+    my $to_wrap = join '::', $package, $args{prefix}.$_;
 
-        my $original = eval '\&' . $to_wrap;
+    my $original = join '::', $package, $_;
+    my $original_ref = eval '\&'.$original;
 
-        my $proto = prototype $to_wrap;
-        $proto &&= "($proto)";
+    my $proto = prototype $original_ref;
+    $proto &&= "($proto)";
 
-        my $builder = Test::Builder->new;
-        $builder->{Have_Plan}        = 1;
-        $builder->{Have_Output_Plan} = 1;
-        $builder->{Expected_Tests}   = 1;
+    no warnings qw/ redefine /;
 
-        no warnings qw/ redefine /;
-
-        eval <<"END";
-
+    eval <<"END";
 
     sub $to_wrap $proto {
+        local \$Test::Builder::Test = {
+            %\$Test::Builder::Test
+        };
+        my \$builder = bless \$Test::Builder::Test, 'Test::Builder';
+
+        \$builder->{Have_Plan}        = 1;
+        \$builder->{Have_Output_Plan} = 1;
+        \$builder->{Expected_Tests}   = 1;
+
         my ( \$output, \$failure, \$todo );
         \$builder->output( \\\$output );
         \$builder->failure_output( \\\$failure);
         \$builder->todo_output( \\\$todo );
 
-        \$original->( \@_ );
+        \$original_ref->( \@_ );
 
         return Test::Wrapper->new(
             output => \$output,
@@ -60,9 +114,8 @@ sub import {
         }
 END
 
-        die $@ if $@;
-
-    }
+    die $@ if $@;
+}
 }
 
 use overload
