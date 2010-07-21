@@ -3,7 +3,9 @@ use warnings;
 
 use Test::More tests => 4;                      # last test to print
 
-use Test::Wrapper qw/ like /;
+use Test::Wrapper;
+
+test_wrap( 'like' );
 
 pass "eins";
 
