@@ -228,5 +228,7 @@ use overload
   'bool' => 'is_success',
   '""'   => sub { $_[0]->diag };
 
+__PACKAGE__->meta->make_immutable;
+
 1;
 

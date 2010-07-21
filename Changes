@@ -1,7 +1,8 @@
 Revision history for Test::Wrapper
 
 {{$NEXT}}
+    * add 'make_immutable' at the end of the class.
 
 0.1.0     2010-07-20 22:04:08 America/Montreal
-    * Initial release.
+    * initial release.
 

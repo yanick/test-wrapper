@@ -1,3 +1,4 @@
+.gitignore
 project.vim
 dist.ini
 ^Test-Wrapper.*
