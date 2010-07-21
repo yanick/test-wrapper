@@ -1,0 +1,59 @@
+{
+   "abstract" : "Use Test::* tests outside of a TAP context",
+   "author" : [
+      "Yanick Champoux <yanick@cpan.org>"
+   ],
+   "dynamic_config" : 0,
+   "generated_by" : "Dist::Zilla version 4.101900, CPAN::Meta::Converter version 2.101590",
+   "license" : [
+      "perl_5"
+   ],
+   "meta-spec" : {
+      "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+      "version" : "2"
+   },
+   "name" : "Test-Wrapper",
+   "prereqs" : {
+      "build" : {
+         "requires" : {
+            "Module::Build" : "0.3601"
+         }
+      },
+      "configure" : {
+         "requires" : {
+            "Module::Build" : "0.3601"
+         }
+      },
+      "runtime" : {
+         "requires" : {
+            "Moose" : 0,
+            "Moose::Exporter" : 0,
+            "Test::Builder" : 0,
+            "overload" : 0
+         }
+      },
+      "test" : {
+         "requires" : {
+            "Carp" : 0,
+            "Scalar::Util" : 0,
+            "Test::More" : "0.94",
+            "perl" : "5.004"
+         }
+      }
+   },
+   "release_status" : "stable",
+   "resources" : {
+      "bugtracker" : {
+         "mailto" : "bug-test-wrapper at rt.cpan.org",
+         "web" : "http://rt.cpan.org/Public/Dist/Display.html?Name=Test-Wrapper"
+      },
+      "homepage" : "http://search.cpan.org/dist/Test-Wrapper/",
+      "repository" : {
+         "type" : "git",
+         "url" : "git://github.com/yanick/test-wrapper.git",
+         "web" : "http://github.com/yanick/test-wrapper/tree"
+      }
+   },
+   "version" : "0.1.0"
+}
+
