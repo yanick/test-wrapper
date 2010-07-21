@@ -1,5 +1,8 @@
 Revision history for Test::Wrapper
 
+0.1.1     2010-07-20 22:32:30 America/Montreal
+    * add 'make_immutable' at the end of the class.
+
 0.1.0     2010-07-20 22:04:08 America/Montreal
-    * Initial release.
+    * initial release.
 

@@ -1,6 +1,6 @@
 package Test::Wrapper;
 BEGIN {
-  $Test::Wrapper::VERSION = '0.1.0';
+  $Test::Wrapper::VERSION = '0.1.1';
 }
 
 # ABSTRACT: Use Test::* tests outside of a TAP context
@@ -89,6 +89,8 @@ use overload
   'bool' => 'is_success',
   '""'   => sub { $_[0]->diag };
 
+__PACKAGE__->meta->make_immutable;
+
 1;
 
 
@@ -101,7 +103,7 @@ Test::Wrapper - Use Test::* tests outside of a TAP context
 
 =head1 VERSION
 
-version 0.1.0
+version 0.1.1
 
 =head1 SYNOPSIS
 
