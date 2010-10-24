@@ -132,14 +132,17 @@ sub test_wrap {
         eval <<"END";
 
     sub $to_wrap $proto {
-        local \$Test::Builder::Test = {
-            %\$Test::Builder::Test
-        };
-        my \$builder = bless \$Test::Builder::Test, 'Test::Builder';
+        local \$Test::Builder::Test = undef;
+
+        my \$builder = Test::Builder->new;
 
         \$builder->{Have_Plan}        = 1;
         \$builder->{Have_Output_Plan} = 1;
         \$builder->{Expected_Tests}   = 1;
+
+        if ( Test::More->VERSION >= 2 ) {
+            \$builder->{History} = Test::Builder2::History->create;
+        }
 
         my ( \$output, \$failure, \$todo );
         \$builder->output( \\\$output );
