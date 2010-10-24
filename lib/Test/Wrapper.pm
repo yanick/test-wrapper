@@ -1,6 +1,6 @@
 package Test::Wrapper;
 BEGIN {
-  $Test::Wrapper::VERSION = '0.1.1';
+  $Test::Wrapper::VERSION = '0.2.0';
 }
 
 # ABSTRACT: Use Test::* tests outside of a TAP context
@@ -41,14 +41,17 @@ sub test_wrap {
         eval <<"END";
 
     sub $to_wrap $proto {
-        local \$Test::Builder::Test = {
-            %\$Test::Builder::Test
-        };
-        my \$builder = bless \$Test::Builder::Test, 'Test::Builder';
+        local \$Test::Builder::Test = undef;
+
+        my \$builder = Test::Builder->new;
 
         \$builder->{Have_Plan}        = 1;
         \$builder->{Have_Output_Plan} = 1;
         \$builder->{Expected_Tests}   = 1;
+
+        if ( Test::More->VERSION >= 2 ) {
+            \$builder->{History} = Test::Builder2::History->create;
+        }
 
         my ( \$output, \$failure, \$todo );
         \$builder->output( \\\$output );
@@ -103,7 +106,7 @@ Test::Wrapper - Use Test::* tests outside of a TAP context
 
 =head1 VERSION
 
-version 0.1.1
+version 0.2.0
 
 =head1 SYNOPSIS
 
@@ -243,7 +246,7 @@ If stringified, the object will return the content of its C<diag> attribute.
 
 =head1 AUTHOR
 
-  Yanick Champoux <yanick@cpan.org>
+Yanick Champoux <yanick@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 

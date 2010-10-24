@@ -21,7 +21,7 @@ my %module_build_args = (
     'Yanick Champoux <yanick@cpan.org>'
   ],
   'dist_name' => 'Test-Wrapper',
-  'dist_version' => '0.1.1',
+  'dist_version' => '0.2.0',
   'license' => 'perl',
   'module_name' => 'Test::Wrapper',
   'recommends' => {},
