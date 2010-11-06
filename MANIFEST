@@ -4,8 +4,10 @@ LICENSE
 MANIFEST
 META.json
 META.yml
+README
 SIGNATURE
 lib/Test/Wrapper.pm
 t/000-report-versions.t
 t/no-interference.t
 t/test-wrap.t
+xt/signature.t
