@@ -26,4 +26,4 @@ resources:
   bugtracker: http://rt.cpan.org/Public/Dist/Display.html?Name=Test-Wrapper
   homepage: http://search.cpan.org/dist/Test-Wrapper/
   repository: git://github.com/yanick/test-wrapper.git
-version: 0.2.0
+version: 0.2.1

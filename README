@@ -2,7 +2,7 @@ NAME
     Test::Wrapper - Use Test::* tests outside of a TAP context
 
 VERSION
-    version 0.2.0
+    version 0.2.1
 
 SYNOPSIS
         use Test::Wrapper;

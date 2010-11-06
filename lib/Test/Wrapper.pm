@@ -1,6 +1,6 @@
 package Test::Wrapper;
 BEGIN {
-  $Test::Wrapper::VERSION = '0.2.0';
+  $Test::Wrapper::VERSION = '0.2.1';
 }
 
 # ABSTRACT: Use Test::* tests outside of a TAP context
@@ -106,7 +106,7 @@ Test::Wrapper - Use Test::* tests outside of a TAP context
 
 =head1 VERSION
 
-version 0.2.0
+version 0.2.1
 
 =head1 SYNOPSIS
 
