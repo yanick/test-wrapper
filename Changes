@@ -2,16 +2,16 @@ Revision history for Test::Wrapper
 
 {{$NEXT}}
 
-0.2.1     2010-11-06 12:38:00 America/Montreal
+0.2.1     2010-11-06
     * add README to the MANIFEST so that signature is okay (RT#62772)
 
-0.2.0     2010-10-24 13:53:08 America/Montreal
+0.2.0     2010-10-24
     * now compatible with Test::Builder2.
     * add a README to the distribution.
 
-0.1.1     2010-07-20 22:32:30 America/Montreal
+0.1.1     2010-07-20
     * add 'make_immutable' at the end of the class.
 
-0.1.0     2010-07-20 22:04:08 America/Montreal
+0.1.0     2010-07-20
     * initial release.
 
