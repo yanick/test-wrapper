@@ -1,6 +1,7 @@
 Revision history for Test::Wrapper
 
 {{$NEXT}}
+    * Adding 'test_name' and 'test_args' attributes..
 
 0.2.1     2010-11-06
     * add README to the MANIFEST so that signature is okay (RT#62772)
